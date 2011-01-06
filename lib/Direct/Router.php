@@ -2,17 +2,29 @@
 
 namespace Direct;
 /**
- * Router that route the client's request.
+ * Router class that route the client's request.
  * 
  * @author Otavio Fernandes <otavio@neton.com.br>
  */
 class Router
 {
     /**
+     * Instance of ExtDirect API.
      * 
+     * @var API
      */
-    public function router()
+    public $api = null;
+    
+    public function __construct()
     {
-        echo "Teste";
+        $this->api = new Api();
+    }
+    
+    /**
+     * Proccess the route of request.
+     */
+    public function route()
+    {
+        
     }
 }
