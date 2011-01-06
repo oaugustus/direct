@@ -41,19 +41,18 @@ class Router
      */
     public function route()
     {
-        echo "<pre>";
-        print_r($_SERVER);
-        echo "</pre>";
         // if request method is get
         if ($this->request->isGET())
         {
             if ($this->request->getResource() == $this->api->getResourceName())
             {
+                // render the api
                 $this->response->render($this->api->stringfy());
             }
             else
             {
-                $this->response->render($this->request->getResource());
+                // render the page
+                $this->response->serve($this->request->getResource());
             }
         }
         elseif ($this->request->isPOST())
