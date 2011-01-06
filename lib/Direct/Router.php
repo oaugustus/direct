@@ -11,12 +11,20 @@ class Router
     /**
      * Instance of ExtDirect API.
      * 
-     * @var API
+     * @var Api
      */
-    public $api = null;
+    private $api = null;
+
+    /**
+     * Instance of RequestHandler.
+     * 
+     * @var RequestHandler
+     */
+    private $request = null;
     
     public function __construct()
     {
+        $this->request = new Request();
         $this->api = new Api();
     }
     
@@ -25,6 +33,20 @@ class Router
      */
     public function route()
     {
-        
+        echo "<pre>";
+        print_r($_SERVER);
+        echo "</pre>";
+        // if request method is get
+        if ($this->request->isGET())
+        {
+            if ($this->request->getResource() == $this->api->getResourceName())
+            {
+                
+            }
+        }
+        else
+        {
+            
+        }
     }
 }
