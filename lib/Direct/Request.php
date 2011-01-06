@@ -15,7 +15,7 @@ class Request
     }
 
     /**
-     * Test is the request method is GET. Return true is right otherwise,
+     * Test is the request method is GET. Return true if it is right otherwise,
      * return false.
      *
      * @return boolean
@@ -23,6 +23,17 @@ class Request
     public function isGET()
     {
         return $_SERVER['REQUEST_METHOD'] == 'GET' ? true : false;
+    }
+
+    /**
+     * Test is the request method is POST. Return true if it is right otherwise,
+     * return false.
+     *
+     * @return boolean
+     */
+    public function isPOST()
+    {
+        return $_SERVER['REQUEST_METHOD'] == 'POST' ? true : false;
     }
 
     /**

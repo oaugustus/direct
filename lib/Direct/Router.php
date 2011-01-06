@@ -16,15 +16,23 @@ class Router
     private $api = null;
 
     /**
-     * Instance of RequestHandler.
+     * Instance of Request.
      * 
-     * @var RequestHandler
+     * @var Request
      */
     private $request = null;
+
+    /**
+     * Instance of Response.
+     * 
+     * @var  Response
+     */
+    private $response = null;
     
     public function __construct()
     {
         $this->request = new Request();
+        $this->response = new Response();
         $this->api = new Api();
     }
     
@@ -41,10 +49,14 @@ class Router
         {
             if ($this->request->getResource() == $this->api->getResourceName())
             {
-                
+                $this->response->render($this->api->stringfy());
+            }
+            else
+            {
+                $this->response->render($this->request->getResource());
             }
         }
-        else
+        elseif ($this->request->isPOST())
         {
             
         }
