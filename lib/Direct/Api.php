@@ -14,7 +14,19 @@ class Api
      * @var string
      */
     private $resourceName = 'api.js';
-    
+
+    /**
+     * Cache file of ExtDirect API.
+     * 
+     * @var string
+     */
+    private $cacheFile = 'api.json';
+
+    public function __construct()
+    {
+        
+    }
+
     /**
      * Return the api resource name.
      * 
