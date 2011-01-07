@@ -1,6 +1,10 @@
 <?php
 require_once __DIR__.'/lib/Direct/ClassLoader.php';
 
+// define application directories constants
+define("APP_PATH",__DIR__);
+define("CONFIG_PATH",__DIR__.'/config');
+
 use Direct\ClassLoader;
 $loader = new ClassLoader();
 
@@ -17,6 +21,10 @@ $loader->registerPrefixes(array(
 ));
 
 $loader->register();
+
+// initialize application configs
+use Direct\Config;
+Config::initialize();
 
 use Direct\Router;
 // route the request
