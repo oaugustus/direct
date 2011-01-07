@@ -10,8 +10,13 @@ $loader->registerNamespaces(array(
     'actions' => __DIR__,
     'models' => __DIR__
 ));
-$loader->register();
 
+// register PEAR like naming convention
+$loader->registerPrefixes(array(
+   'sfYaml' => __DIR__.'/lib/sfYaml'
+));
+
+$loader->register();
 
 use Direct\Router;
 // route the request

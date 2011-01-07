@@ -8,5 +8,15 @@ namespace Direct;
  */
 class Config
 {
-    
+    /**
+     * Config file. 
+     * 
+     * @var string.
+     */
+    private $configFile = 'config.yml';
+
+    public function __construct()
+    {
+        
+    }
 }
