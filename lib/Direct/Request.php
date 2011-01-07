@@ -22,7 +22,7 @@ class Request
      */
     public function isGET()
     {
-        return $_SERVER['REQUEST_METHOD'] == 'GET' ? true : false;
+        return $_SERVER['REQUEST_METHOD'] == 'GET';
     }
 
     /**
@@ -33,7 +33,7 @@ class Request
      */
     public function isPOST()
     {
-        return $_SERVER['REQUEST_METHOD'] == 'POST' ? true : false;
+        return $_SERVER['REQUEST_METHOD'] == 'POST';
     }
 
     /**
