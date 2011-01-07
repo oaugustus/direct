@@ -22,9 +22,10 @@ $loader->registerPrefixes(array(
 
 $loader->register();
 
-// initialize application configs
 use Direct\Config;
-Config::initialize();
+
+// load development enviroment configs
+Config::load('dev');
 
 use Direct\Router;
 // route the request

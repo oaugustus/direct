@@ -24,7 +24,15 @@ class Api
 
     public function __construct()
     {
-        
+        // if application is in debug mode
+        if (Config::get('app.debug'))
+        {
+            // forces the generation of API based on actions classes
+        }
+        else
+        {
+            // load the direct api in cache file
+        }
     }
 
     /**

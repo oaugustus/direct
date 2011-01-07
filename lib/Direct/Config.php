@@ -9,13 +9,6 @@ namespace Direct;
 class Config
 {
     /**
-     * Config file. 
-     * 
-     * @var string.
-     */
-    private static $configFile = 'config.yml';
-
-    /**
      * Error message to throw in config file not found Exception.
      * 
      * @var string
@@ -38,16 +31,18 @@ class Config
 
     /**
      * Load the configuratios in config file.
+     *
+     * @param string $env Config enviroment file
      */
-    public static function initialize()
+    public static function load($env)
     {
-        if (file_exists(CONFIG_PATH.'/'.self::$configFile))
+        if (file_exists(CONFIG_PATH.'/'.$env.'.yml'))
         {
-            self::$config = \sfYaml::load(CONFIG_PATH.'/'.self::$configFile);
+            self::$config = \sfYaml::load(CONFIG_PATH.'/'.$env.'.yml');
         }
         else
         {
-            throw new \Exception(\sprintf(self::$fileFaultMsg,self::$configFile));
+            throw new \Exception(\sprintf(self::$fileFaultMsg,$env.'.yml'));
         }
 
     }
