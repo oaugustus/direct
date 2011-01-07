@@ -47,7 +47,7 @@ class Router
             if ($this->request->getResource() == $this->api->getResourceName())
             {
                 // render the api
-                $this->response->render($this->api->stringfy());
+                $this->response->render($this->api);
             }
             else
             {

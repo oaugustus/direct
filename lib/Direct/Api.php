@@ -24,4 +24,12 @@ class Api
     {
         return $this->resourceName;
     }
+
+    /**
+     * Generate a JS ExtDirect API
+     */
+    public function __toString()
+    {
+        
+    }
 }
