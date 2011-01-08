@@ -4,6 +4,7 @@ require_once __DIR__.'/lib/Direct/ClassLoader.php';
 // define application directories constants
 define("APP_PATH",__DIR__);
 define("CONFIG_PATH",__DIR__.'/config');
+define("CACHE_PATH",__DIR__.'/cache');
 
 use Direct\ClassLoader;
 $loader = new ClassLoader();
@@ -11,6 +12,7 @@ $loader = new ClassLoader();
 // register the namespaces to exposes to ClassLoader
 $loader->registerNamespaces(array(
     'Direct' => __DIR__.'/lib',
+    'Symfony' => __DIR__.'/lib',
     'actions' => __DIR__,
     'models' => __DIR__
 ));
