@@ -1,6 +1,7 @@
 <?php
 
 namespace Direct;
+
 /**
  * Response class that handle http responses.
  *
@@ -37,7 +38,7 @@ class Response
      * @param string $resource
      */
     public function serve($resource)
-    {
+    {        
         $resource = ($resource !== '') ? $resource : $this->defaultResource;
         $file = $this->viewsLocation.$resource;
 
@@ -46,6 +47,12 @@ class Response
             throw new \Exception("The {$resource} was not found in {$this->viewsLocation} directory!");
         }
 
-        $this->render(file_get_contents($file));        
+        $loader = new \Twig_Loader_Filesystem(VIEW_PATH);
+        $twig = new \Twig_Environment($loader, array(
+            'cache' => Config::get('app.debug') ? false : CACHE_PATH.'/resource'
+        ));
+
+        $template = $twig->loadTemplate($resource);
+        $this->render($template->display(array('name' => 'Fabien')));
     }
 }

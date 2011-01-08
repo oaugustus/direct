@@ -17,14 +17,14 @@ $loader = new ClassLoader();
 $loader->registerNamespaces(array(
     'Direct' => __DIR__.'/lib',
     'Symfony' => __DIR__.'/lib',
-    'Twig' => __DIR__.'/lib',
     'actions' => __DIR__,
     'models' => __DIR__
 ));
 
 // register PEAR like naming convention
 $loader->registerPrefixes(array(
-   'sfYaml' => __DIR__.'/lib/sfYaml'
+   'sfYaml' => __DIR__.'/lib/sfYaml',
+   'Twig' => __DIR__.'/lib',
 ));
 
 $loader->register();

@@ -80,4 +80,14 @@ class Config
             }
         }
     }
+
+    /**
+     * Return all configurations loaded.
+     *
+     * @return array
+     */
+    static public function all()
+    {
+        return self::$config;
+    }
 }

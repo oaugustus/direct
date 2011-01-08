@@ -142,6 +142,7 @@ class ClassLoader
         if (0 === strpos($class, $prefix))
         {
           $file = $dir.DIRECTORY_SEPARATOR.str_replace('_', DIRECTORY_SEPARATOR, $class).'.php';
+
           if (file_exists($file))
           {
             require $file;
