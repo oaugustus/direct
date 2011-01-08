@@ -1,6 +1,8 @@
 <?php
 
 namespace Direct;
+
+use \Symfony\Component\Finder\Finder;
 /**
  * API class that generate JS ExtDirect API.
  *
@@ -29,6 +31,20 @@ class Api
      */
     private $api = null;
 
+    /**
+     * Type of ExtDirect Api.
+     * 
+     * @var string
+     */
+    private $type = 'remoting';
+
+    /**
+     * URL of Router route.
+     * 
+     * @var string
+     */
+    private $routerUrl = '/';
+    
     public function __construct()
     {
         // if application is in debug mode
@@ -83,12 +99,57 @@ class Api
     {
         file_put_contents(CACHE_PATH.'/'.$this->cacheFile, json_encode($api));
     }
+
+
+    /**
+     * Create the ExtDirect api based on Actions.
+     * 
+     * @return array
+     */
+    private function createApi()
+    {
+        $api = array();
+        $finder = new Finder();
+        $finder->files()->in(ACTION_PATH);
+        $finder->files()->name('*.php');
+
+        foreach ($finder as $file)
+        {
+            $actionName = $this->getAction($file->getRealpath());
+            $action = new ReflectionAction($actionName);
+            $aApi = $action->getApi();
+
+            if ($aApi)
+                $api[$this->getActionIndex($actionName)] = $aApi;
+        }
+
+        return $api;
+    }
+
+    private function getActionIndex($action)
+    {
+        return str_replace('.actions.','',str_replace('\\', '.', $action));
+    }
+    /**
+     * Return full action qualified namespace.
+     * 
+     * @param  string $full_path
+     * @return string 
+     */
+    private function getAction($full_path)
+    {
+        return str_replace('.php','',str_replace(APP_PATH, '', $full_path));
+    }
     
     /**
      * Generate a JS ExtDirect API
      */
     public function __toString()
     {
+        $api['url'] = $this->routerUrl;
+        $api['type'] = $this->type;
+        $api['actions'] = $this->api;
         
+        return json_encode($api);
     }
 }

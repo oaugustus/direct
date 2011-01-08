@@ -3,8 +3,10 @@ require_once __DIR__.'/lib/Direct/ClassLoader.php';
 
 // define application directories constants
 define("APP_PATH",__DIR__);
+define("ACTION_PATH",__DIR__.'/actions');
 define("CONFIG_PATH",__DIR__.'/config');
 define("CACHE_PATH",__DIR__.'/cache');
+
 
 use Direct\ClassLoader;
 $loader = new ClassLoader();
