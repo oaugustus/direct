@@ -9,11 +9,6 @@ namespace Direct;
  */
 class Request
 {
-    public function __construct()
-    {
-        
-    }
-
     /**
      * Test is the request method is GET. Return true if it is right otherwise,
      * return false.
@@ -46,5 +41,20 @@ class Request
         $parts = explode('/',$_SERVER['REQUEST_URI']);
         
         return end($parts);
+    }
+
+    /**
+     * Return the raw data from POST request
+     *
+     * @return Array
+     */
+    public function getRawData()
+    {
+        $data = json_decode($GLOBALS['HTTP_RAW_POST_DATA']);
+
+        if (!is_array($data))
+            $data = array($data);
+        
+        return $data;
     }
 }

@@ -39,6 +39,10 @@ class Response
         echo $response;
     }
 
+    public function responde($response)
+    {
+        $this->render(json_encode($response));
+    }
     /**
      * Serve an requested resource.
      * 

@@ -57,7 +57,45 @@ class Router
         }
         elseif ($this->request->isPOST())
         {
+            $calls = $this->request->getRawData();
+            $response = array();
             
+            foreach ($calls as $call)
+            {
+                $response[] = $this->dispatch($call);
+            }
+
+            $this->response->responde($response);
         }
+    }
+
+    /**
+     * Dispatch all request calls.
+     * 
+     * @param StdClass $call
+     */
+    private function dispatch($call)
+    {
+        $actionClass = '\\actions\\'.str_replace('.', '\\', $call->action);
+
+        if (!class_exists($actionClass))
+        {
+            throw new \Exception('The '.$call->action.' action not exists!');
+        }
+
+        // instantiate the action
+        $action = new $actionClass();
+
+        if (!is_callable(array($action, $call->method)))
+        {
+            throw new \Exception('The '.$this->method.' method not exists in '.$call->action.' action!');
+        }
+        $method = $call->method;
+
+        $response = (array)$call;
+        unset($response['data']);
+        $response['result'] = $action->$method((array)$call->data[0]);
+        
+        return $response;
     }
 }

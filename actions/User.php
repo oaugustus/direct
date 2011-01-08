@@ -6,8 +6,8 @@ class User
     /**
      * @remote true
      */
-    public function test()
+    public function test($params)
     {
-        echo "Test";
+        return "Hello ".$params['name'];
     }
 }
