@@ -14,7 +14,7 @@ class Response
      * 
      * @var string
      */
-    private $defaultResource = 'index.html';
+    private $defaultResource = 'ui/web/index.html';
 
     /**
      * Define views location.
@@ -53,6 +53,6 @@ class Response
         ));
 
         $template = $twig->loadTemplate($resource);
-        $this->render($template->display(array('name' => 'Fabien')));
+        $this->render($template->display(Config::all()));
     }
 }

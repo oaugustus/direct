@@ -1,2 +1,12 @@
 app:
   debug: true
+  name: Direct Application
+  url: http://localhost/direct/
+  api:
+    resource: api.js
+    cache: api.json
+    url: /
+    type: remoting
+    variable: Ext.app.REMOTING_API
+  lib:
+    extjs: lib/ui/extjs/

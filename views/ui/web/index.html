@@ -1,0 +1,22 @@
+<html>
+<head>
+    <title>{{app.name}}</title>
+    <!-- CSS-->
+    <link rel="stylesheet" type="text/css" href="{{app.lib.extjs}}resources/css/ext-all.css" />
+
+    <!-- Javascript-->
+    <script type="text/javascript" src="{{app.lib.extjs}}adapter/ext/ext-base.js"></script>
+    <script type="text/javascript" src="{{app.lib.extjs}}ext-all-debug.js"></script>
+
+    <script type="text/javascript" src="{{app.url}}{{app.api.resource}}"></script>
+
+    <script>
+        Ext.onReady(function(){
+           alert('Ready');
+        });
+    </script>
+</head>
+<body>
+
+</body>
+</html>

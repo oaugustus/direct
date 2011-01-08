@@ -15,14 +15,14 @@ class Api
      * 
      * @var string
      */
-    private $resourceName = 'api.js';
+    private $resourceName = null;
 
     /**
      * Cache file of ExtDirect API.
      * 
      * @var string
      */
-    private $cacheFile = 'api.json';
+    private $cacheFile = null;
 
     /**
      * Store the API collected in the actions.
@@ -36,7 +36,7 @@ class Api
      * 
      * @var string
      */
-    private $type = 'remoting';
+    private $type = null;
 
     /**
      * URL of Router route.
@@ -55,6 +55,9 @@ class Api
     
     public function __construct()
     {
+        // initialize the private api properties
+        $this->initialize();
+        
         // if application is in debug mode
         if (Config::get('app.debug'))
         {
@@ -76,6 +79,18 @@ class Api
                 $this->api = json_decode($this->readCache());
             }
         }
+    }
+
+    /**
+     * Initialize the api private properties.
+     */
+    private function initialize()
+    {
+        $this->resourceName = Config::get('app.api.resource');
+        $this->cacheFile = Config::get('app.api.cache');
+        $this->type = Config::get('app.api.type');
+        $this->varName = Config::get('app.api.variable');
+        $this->routerUrl = Config::get('app.api.url');
     }
 
     /**
@@ -134,10 +149,17 @@ class Api
         return $api;
     }
 
+    /**
+     * Get an array index to full qualified action namespace.
+     * 
+     * @param string $action
+     * @return string
+     */
     private function getActionIndex($action)
     {
         return str_replace('.actions.','',str_replace('\\', '.', $action));
     }
+    
     /**
      * Return full action qualified namespace.
      * 
