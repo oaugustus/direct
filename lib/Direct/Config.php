@@ -88,28 +88,45 @@ class Config
         }
     }
 
-    public static function merge()
+    /**
+     * Merge configs with a new config passed by.
+     *
+     * @author code from php.net
+     * @return array
+     */
+    static public function merge()
     {
-         $arrays = func_get_args();
-          $base = array_shift($arrays);
-          if(!is_array($base)) $base = empty($base) ? array() : array($base);
-          foreach($arrays as $append) {
+        $arrays = func_get_args();
+        $base = array_shift($arrays);
+
+        if(!is_array($base)) $base = empty($base) ? array() : array($base);
+
+        foreach($arrays as $append)
+        {
             if(!is_array($append)) $append = array($append);
-            foreach($append as $key => $value) {
-              if(!array_key_exists($key, $base) and !is_numeric($key)) {
+            foreach($append as $key => $value)
+            {
+              if(!array_key_exists($key, $base) and !is_numeric($key))
+              {
                 $base[$key] = $append[$key];
                 continue;
               }
-              if(is_array($value) or is_array($base[$key])) {
+              if(is_array($value) or is_array($base[$key]))
+              {
                 $base[$key] = self::merge($base[$key], $append[$key]);
-              } else if(is_numeric($key)) {
+              }
+              else if(is_numeric($key))
+              {
                 if(!in_array($value, $base)) $base[] = $value;
-              } else {
+              }
+              else
+              {
                 $base[$key] = $value;
               }
             }
-          }
-          return $base;
+        }
+          
+        return $base;
     }
     /**
      * Return all configurations loaded.
