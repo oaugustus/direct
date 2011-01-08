@@ -10,6 +10,11 @@
 
     <script type="text/javascript" src="{{app.url}}{{app.api.resource}}"></script>
 
+    <!-- Instantiation of ExtDirect Api-->
+    <script>
+        Ext.Direct.addProvider({{app.api.variable}});
+    </script>
+
     <script>
         Ext.onReady(function(){
            alert('Ready');

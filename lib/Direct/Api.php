@@ -179,6 +179,11 @@ class Api
         $api['url'] = $this->routerUrl;
         $api['type'] = $this->type;
         $api['actions'] = $this->api;
+
+        if (Config::get('app.api.namespace'))
+        {
+            $api['namespace'] = Config::get('app.api.namespace');
+        }
         
         return $this->varName." = ".json_encode($api);
     }

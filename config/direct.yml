@@ -6,8 +6,10 @@ app:
     form_attribute: '@form'
     url: /
     type: remoting
+    namespace: false
     variable: Ext.app.REMOTING_API
   response:
     default_resource: ui/web/index.html
+    views_location: views/
   lib:
     extjs: lib/ui/extjs/

@@ -1,3 +1,5 @@
 app:
   name: Direct Application
   url: http://localhost/direct/
+  api:
+    namespace: Action

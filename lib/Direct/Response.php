@@ -14,18 +14,19 @@ class Response
      * 
      * @var string
      */
-    private $defaultResource = '';
+    private $defaultResource = null;
 
     /**
      * Define views location.
      * 
      * @var string
      */
-    private $viewsLocation = 'views/';
+    private $viewsLocation = null;
 
     public function __construct()
     {
         $this->defaultResource = Config::get('app.response.default_resource');
+        $this->viewsLocation = Config::get('app.response.views_location');
     }
     
     /**
