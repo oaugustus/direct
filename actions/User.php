@@ -10,4 +10,13 @@ class User
     {
         return "Hello ".$params['name'];
     }
+
+    /**
+     * @remote
+     * @form 
+     */
+    public function sendForm($data)
+    {
+        return true;
+    }
 }

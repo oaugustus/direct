@@ -39,9 +39,24 @@ class Response
         echo $response;
     }
 
-    public function responde($response)
-    {
-        $this->render(json_encode($response));
+    /**
+     * Responde a request call.
+     * 
+     * @param array $response
+     * @param bolean $upload
+     */
+    public function responde($response, $upload = false)
+    {        
+        if (!$upload)
+        {
+            $this->render(json_encode($response));
+        }
+        else
+        {
+            $format = '<html><body><textarea>%s</textarea></body></html>';
+            $this->render(sprintf($format,json_encode($response)));
+        }
+        
     }
     /**
      * Serve an requested resource.

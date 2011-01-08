@@ -17,7 +17,51 @@
 
     <script>
         Ext.onReady(function(){
-           alert('Ready');
+           var a = new Ext.FormPanel({
+               title: 'Form test',
+               renderTo: Ext.getBody(),
+               padding: '8 8 8 8',
+               width: 250,
+               frame: true,
+               labelWidth: 50,
+               fileUpload: true,
+               api:{
+                   submit: Action.User.sendForm
+               },
+               listeners:{
+                   'actionfailed' : function(){
+                       alert('error');
+                   },
+                   'actioncomplete' : function(){
+                       alert('success');
+                   }
+               },
+               items:[
+                   {
+                       name: 'name',
+                       fieldLabel: 'Name',
+                       xtype: 'textfield',
+                       anchor: '100%',
+                       allowBlank: false
+                   },
+                   {
+                       xtype: 'textfield',
+                       inputType: 'file',
+                       name: 'file'
+                   }
+               ],
+               buttons:[
+                   {
+                       text: 'Submit',
+                       handler: function(){
+                           if (a.getForm().isValid()){
+                              a.getForm().submit();
+                           }
+                       },
+                       scope: this
+                   }
+               ]
+           });
         });
     </script>
 </head>

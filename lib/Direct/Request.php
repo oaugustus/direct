@@ -21,7 +21,7 @@ class Request
     }
 
     /**
-     * Test is the request method is POST. Return true if it is right otherwise,
+     * Test if the request method is POST. Return true if it is right otherwise,
      * return false.
      *
      * @return boolean
@@ -29,6 +29,28 @@ class Request
     public function isPOST()
     {
         return $_SERVER['REQUEST_METHOD'] == 'POST';
+    }
+
+    /**
+     * Test if the request call if a form call. Return true if it is right
+     * otherwise, return false.
+     * 
+     * @return boolean
+     */
+    public function isFormCall()
+    {
+        return isset($_POST['extTID']);
+    }
+
+    /**
+     * Test if the request call if upload form call. Return true if it is right
+     * otherwise, return false.
+     *
+     * @return boolean
+     */
+    public function isUpload()
+    {
+        return $_POST['extUpload'] == 'false' ? false : true;
     }
 
     /**
@@ -56,5 +78,15 @@ class Request
             $data = array($data);
         
         return $data;
+    }
+
+    /**
+     * Return the data from POST request.
+     *
+     * @return array
+     */
+    public function getData()
+    {
+        return $_POST;
     }
 }
