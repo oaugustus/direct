@@ -44,6 +44,14 @@ class Api
      * @var string
      */
     private $routerUrl = '/';
+
+
+    /**
+     * Name of JS variable that will take de ExtDirect API.
+     * 
+     * @var string
+     */
+    private $varName = 'Ext.app.REMOTING_API';
     
     public function __construct()
     {
@@ -150,6 +158,6 @@ class Api
         $api['type'] = $this->type;
         $api['actions'] = $this->api;
         
-        return json_encode($api);
+        return $this->varName." = ".json_encode($api);
     }
 }

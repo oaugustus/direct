@@ -6,6 +6,8 @@ define("APP_PATH",__DIR__);
 define("ACTION_PATH",__DIR__.'/actions');
 define("CONFIG_PATH",__DIR__.'/config');
 define("CACHE_PATH",__DIR__.'/cache');
+define("MODEL_PATH",__DIR__.'/models');
+define("VIEW_PATH",__DIR__.'/views');
 
 
 use Direct\ClassLoader;
@@ -15,6 +17,7 @@ $loader = new ClassLoader();
 $loader->registerNamespaces(array(
     'Direct' => __DIR__.'/lib',
     'Symfony' => __DIR__.'/lib',
+    'Twig' => __DIR__.'/lib',
     'actions' => __DIR__,
     'models' => __DIR__
 ));
