@@ -19,14 +19,14 @@ class ReflectionAction
      * 
      * @var string
      */
-    private $remoteAttribute = '@remote';
+    private $remoteAttribute = null;
 
     /**
      * Define the form attribute to setup a method as form handler.
      * 
      * @var string
      */
-    private $formAttribute = '@form';
+    private $formAttribute = null;
     
     /**
      * Instantiate a ReflectionClass object to action class.
@@ -35,6 +35,9 @@ class ReflectionAction
      */
     public function __construct($action)
     {
+        $this->remoteAttribute = Config::get('app.api.remote_attribute');
+        $this->formAttribute = Config::get('app.api.form_attribute');
+        
         $this->reflection = new \ReflectionClass($action);
     }
 

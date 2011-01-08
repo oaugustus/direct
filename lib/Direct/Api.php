@@ -51,7 +51,7 @@ class Api
      * 
      * @var string
      */
-    private $varName = 'Ext.app.REMOTING_API';
+    private $varName = null;
     
     public function __construct()
     {

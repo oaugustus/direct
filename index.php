@@ -32,7 +32,7 @@ $loader->register();
 use Direct\Config;
 
 // load development enviroment configs
-Config::load('dev');
+Config::load('direct','app','dev');
 
 use Direct\Router;
 // route the request

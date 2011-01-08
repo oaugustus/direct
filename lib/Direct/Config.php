@@ -32,19 +32,26 @@ class Config
     /**
      * Load the configuratios in config file.
      *
-     * @param string $env Config enviroment file
+     * Example usage:
+     *   Config::load('level1','level2','level3');
+     * 
+     * @param string $env
      */
-    public static function load($env)
+    public static function load()
     {
-        if (file_exists(CONFIG_PATH.'/'.$env.'.yml'))
-        {
-            self::$config = \sfYaml::load(CONFIG_PATH.'/'.$env.'.yml');
-        }
-        else
-        {
-            throw new \Exception(\sprintf(self::$fileFaultMsg,$env.'.yml'));
-        }
+        $args = func_get_args();
 
+        foreach ($args as $env)
+        {
+            if (file_exists(CONFIG_PATH.'/'.$env.'.yml'))
+            {
+                self::$config = self::merge(self::$config, \sfYaml::load(CONFIG_PATH.'/'.$env.'.yml'));
+            }
+            else
+            {
+                throw new \Exception(\sprintf(self::$fileFaultMsg,$env.'.yml'));
+            }            
+        }
     }
 
     /**
@@ -81,6 +88,29 @@ class Config
         }
     }
 
+    public static function merge()
+    {
+         $arrays = func_get_args();
+          $base = array_shift($arrays);
+          if(!is_array($base)) $base = empty($base) ? array() : array($base);
+          foreach($arrays as $append) {
+            if(!is_array($append)) $append = array($append);
+            foreach($append as $key => $value) {
+              if(!array_key_exists($key, $base) and !is_numeric($key)) {
+                $base[$key] = $append[$key];
+                continue;
+              }
+              if(is_array($value) or is_array($base[$key])) {
+                $base[$key] = self::merge($base[$key], $append[$key]);
+              } else if(is_numeric($key)) {
+                if(!in_array($value, $base)) $base[] = $value;
+              } else {
+                $base[$key] = $value;
+              }
+            }
+          }
+          return $base;
+    }
     /**
      * Return all configurations loaded.
      *

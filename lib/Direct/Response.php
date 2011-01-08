@@ -14,7 +14,7 @@ class Response
      * 
      * @var string
      */
-    private $defaultResource = 'ui/web/index.html';
+    private $defaultResource = '';
 
     /**
      * Define views location.
@@ -22,6 +22,12 @@ class Response
      * @var string
      */
     private $viewsLocation = 'views/';
+
+    public function __construct()
+    {
+        $this->defaultResource = Config::get('app.response.default_resource');
+    }
+    
     /**
      * Render the response
      *

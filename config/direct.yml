@@ -1,0 +1,13 @@
+app:
+  api:
+    resource: api.js
+    cache: api.json
+    remote_attribute: '@remote'
+    form_attribute: '@form'
+    url: /
+    type: remoting
+    variable: Ext.app.REMOTING_API
+  response:
+    default_resource: ui/web/index.html
+  lib:
+    extjs: lib/ui/extjs/
