@@ -1,1 +1,1 @@
-Direct is a ExtJS ExtDirect based framework to PHP 5.3.
+Direct is an ExtJS ExtDirect based framework to PHP 5.3.
