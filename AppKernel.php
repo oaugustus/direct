@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__.'/lib/Direct/Kernel.php';
+require_once __DIR__.'/lib/vendor/Direct/Kernel.php';
 
 use Direct\Kernel;
 use Direct\Config;
@@ -24,20 +24,29 @@ class AppKernel extends Kernel
     }
     
     /**
-     * Register the framework and application constants
+     * Register the framework and application constants.
+     * 
+     * Example of contant register:
+     *   define("UPLOAD_PATH",$this->appPath."/upload");
      */
     public function  registerConstants()
     {
-        define("APP_PATH",__DIR__);
-        define("ACTION_PATH",__DIR__.'/actions');
-        define("CONFIG_PATH",__DIR__.'/config');
-        define("CACHE_PATH",__DIR__.'/cache');
-        define("MODEL_PATH",__DIR__.'/models');
-        define("VIEW_PATH",__DIR__.'/views');        
+        parent::registerConstants();
     }
     
     /**
      * Register the application libraries
+     *
+     * Example library register:
+     *   * PHP 5.3 naming convention library:
+     *     $this->loader->registerNamespaces(array(
+     *           'Doctrine' => $this->appPath.'/lib'
+     *     );
+     * 
+     *   * PEAR naming convention library:
+     *     $this->loader->registerPrefixes(array(
+     *        'sfYaml' => $this->appPath.'/lib/sfYaml'
+     *     );
      */
     public function  registerLibraries()
     {
@@ -46,6 +55,9 @@ class AppKernel extends Kernel
 
     /**
      * Setup the development enviroment configs.
+     *
+     * Example of config load:
+     *   Config::load('level1','level2','level3');
      */
     public function  setupDev()
     {
@@ -54,6 +66,9 @@ class AppKernel extends Kernel
 
     /**
      * Setup the production enviroment configs.
+     *
+     * Example of config load:
+     *   Config::load('level1','level2','level3');
      */
     public function  setupProduction()
     {
@@ -62,6 +77,9 @@ class AppKernel extends Kernel
 
     /**
      * Setup the test enviroment configs.
+     *
+     * Example of config load:
+     *   Config::load('level1','level2','level3');
      */
     public function  setupTest()
     {
