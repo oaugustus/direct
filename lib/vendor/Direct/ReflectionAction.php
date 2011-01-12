@@ -58,6 +58,7 @@ class ReflectionAction
             if ($mApi)
             {
                 $mApi['remotens'] = $ns;
+                
                 $api[] = $mApi;
             }
         }

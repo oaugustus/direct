@@ -212,8 +212,8 @@ class Api
         
 
         $format = "Ext.Direct.addProvider(%s);";
-        
-        return sprintf($format, implode(',',$jsApi));
+
         //return $this->varName." = ".json_encode($api);
+        return sprintf($format, implode(',',$jsApi));        
     }
 }

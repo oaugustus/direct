@@ -101,7 +101,10 @@ class Router
         unset($args['extType']);
         unset($args['extUpload']);
 
-        $partial = str_replace(Config::get('app.api.namespace').'.','',$data['extNamespace'].".".$data['extAction']);
+        $partial = str_replace(Config::get('app.api.namespace').'.',
+                '',
+                $data['extNamespace'].".".$data['extAction']
+        );
 
         $actionClass = '\\actions\\'.str_replace('.', '\\', $partial);
 
@@ -126,7 +129,10 @@ class Router
      */
     private function dispatch($call)
     {
-        $partial = str_replace(Config::get('app.api.namespace').'.','',$call->namespace.".".$call->action);
+        $partial = str_replace(Config::get('app.api.namespace').'.',
+                '',
+                $call->namespace.".".$call->action
+        );
 
         $actionClass = '\\actions\\'.str_replace('.', '\\', $partial);
 
