@@ -1,6 +1,6 @@
 app:
+  debug: false
   name: Direct Application
   url: http://localhost/direct/
   api:
     url: http://localhost/direct/
-    namespace: Action

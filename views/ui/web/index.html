@@ -7,13 +7,11 @@
     <!-- Javascript-->
     <script type="text/javascript" src="{{app.lib.extjs}}adapter/ext/ext-base.js"></script>
     <script type="text/javascript" src="{{app.lib.extjs}}ext-all-debug.js"></script>
-
-    <script type="text/javascript" src="{{app.url}}{{app.api.resource}}"></script>
+    <!-- Overrides -->
+    <script type="text/javascript" src="{{app.lib.extjs}}overrides/override-all.js"></script>
 
     <!-- Instantiation of ExtDirect Api-->
-    <script>
-        Ext.Direct.addProvider({{app.api.variable}});
-    </script>
+    <script type="text/javascript" src="{{app.url}}{{app.api.resource}}"></script>
 
     <script>
         Ext.onReady(function(){
@@ -26,14 +24,14 @@
                labelWidth: 50,
                fileUpload: true,
                api:{
-                   submit: Action.User.sendForm
+                   submit: Action.Tests.User.sendForm
                },
                listeners:{
                    'actionfailed' : function(){
                        alert('error');
                    },
-                   'actioncomplete' : function(){
-                       alert('success');
+                   'actioncomplete' : function(a,b){
+                       console.info("Form sended with success!");
                    }
                },
                items:[

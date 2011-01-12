@@ -140,12 +140,16 @@ class Api
         {
             $actionName = $this->getAction($file->getRealpath());
             $action = new ReflectionAction($actionName);
-            $aApi = $action->getApi();
+            $actionNs = $this->getActionNamespaceIndex($actionName);
+            $aApi = $action->getApi($actionNs);
 
             if ($aApi)
-                $api[$this->getActionIndex($actionName)] = $aApi;
+            {
+                $api[$actionNs][$this->getActionIndex($actionName)] = $aApi;
+            }
+             
         }
-
+        
         return $api;
     }
 
@@ -157,9 +161,24 @@ class Api
      */
     private function getActionIndex($action)
     {
-        return str_replace('.actions.','',str_replace('\\', '.', $action));
+        $partial = str_replace('.actions.','',str_replace('\\', '.', $action));
+        
+        return str_replace('.','',substr($partial, strrpos($partial, '.'), strlen($partial)));
     }
-    
+
+    /**
+     * Return the action name space index.
+     * 
+     * @param  string $action
+     * @return string
+     */
+    private function getActionNamespaceIndex($action)
+    {
+        $partial = str_replace('.actions.','',str_replace('\\', '.', $action));        
+        $ns = substr($partial, 0, strrpos($partial, '.'));
+        
+        return ($ns != '') ? $ns : Config::get('app.api.namespace');
+    }
     /**
      * Return full action qualified namespace.
      * 
@@ -178,13 +197,23 @@ class Api
     {
         $api['url'] = $this->routerUrl;
         $api['type'] = $this->type;
-        $api['actions'] = $this->api;
+        $jsApi = array();
 
-        if (Config::get('app.api.namespace'))
+        foreach ($this->api as $ns => $actions)
         {
-            $api['namespace'] = Config::get('app.api.namespace');
+            $api['namespace'] = $ns != Config::get('app.api.namespace') ?
+                Config::get('app.api.namespace').".".$ns : $ns;
+            $api['id'] = $ns;
+            $api['actions'] = $actions;
+            
+            $jsApi[] = json_encode($api);
+
         }
         
-        return $this->varName." = ".json_encode($api);
+
+        $format = "Ext.Direct.addProvider(%s);";
+        
+        return sprintf($format, implode(',',$jsApi));
+        //return $this->varName." = ".json_encode($api);
     }
 }

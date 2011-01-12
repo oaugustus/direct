@@ -46,7 +46,7 @@ class ReflectionAction
      * 
      * @return mixed (array, boolean)
      */
-    public function getApi()
+    public function getApi($ns)
     {
         $api = false;
         $methods = $this->reflection->getMethods(\ReflectionMethod::IS_PUBLIC);
@@ -56,7 +56,10 @@ class ReflectionAction
             $mApi = $this->getMethodApi($method);
             
             if ($mApi)
+            {
+                $mApi['remotens'] = $ns;
                 $api[] = $mApi;
+            }
         }
 
 

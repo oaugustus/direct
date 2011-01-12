@@ -6,7 +6,7 @@ app:
     form_attribute: '@form'
     url: /
     type: remoting
-    namespace: false
+    namespace: Action
     variable: Ext.app.REMOTING_API
   response:
     default_resource: ui/web/index.html
