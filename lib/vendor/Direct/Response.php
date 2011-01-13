@@ -45,7 +45,7 @@ class Response
      * @param array $response
      * @param bolean $upload
      */
-    public function responde($response, $upload = false)
+    public function respond($response, $upload = false)
     {        
         if (!$upload)
         {

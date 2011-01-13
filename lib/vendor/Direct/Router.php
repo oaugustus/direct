@@ -59,7 +59,7 @@ class Router
         {
             if ($this->request->isFormCall())
             {
-                $this->response->responde($this->dispatchForm($this->request->getData()),$this->request->isUpload());
+                $this->response->respond($this->dispatchForm($this->request->getData()),$this->request->isUpload());
             }
             else
             {
@@ -71,7 +71,7 @@ class Router
                     $response[] = $this->dispatch($call);
                 }
 
-                $this->response->responde($response);                
+                $this->response->respond($response);
             }
         }
     }
